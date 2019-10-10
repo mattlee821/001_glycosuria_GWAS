@@ -1,74 +1,69 @@
 
 # GWAS of glycosuria
 
-## Common variation on chromosome 16 is associated with glycosuria in pregnancy: Findings from a genome-wide association study in European women.
+Date of publication - 2019-10-07
 
-Citation:
-…..
+## Title
 
-<img src="./manuscript/figures/Figure 1. Manhattan plot of a GWAS of self-reported glycosuria in the third trimester of pregnancy in ALSPAC.png" alt="Figure 1. Manhattan plot of a GWAS of self-reported glycosuria in the third trimester of pregnancy in ALSPAC">
-Figure 1. Manhattan plot of a GWAS of self-reported glycosuria in the
-third trimester of pregnancy in ALSPAC
+Common variation on chromosome 16 is associated with glycosuria in
+pregnancy: Findings from a genome-wide association study in European
+women.
 
-### Summary
+## Citation
 
-#### Repo
+……
 
-This GitHub repo hosts all scripts used in the analysis for the paper of
-a GWAS of glycosuria. It also hosts a copy of the manuscript, figures,
-tables and supplementary material.
+## Summary statistics
 
-In order to reproduce this analysis you will need access to the Avon
-Longitudinal Study of Parents and Children as well as the Northern
-Finnish Birth Cohort 1986
+All summary statistcs are available on the [data.bris
+website]().
 
-  - [ALSPAC](http://www.bristol.ac.uk/alspac/researchers/access/)
-  - [NFBC1986](http://www.bristol.ac.uk/alspac/researchers/access/)
+## Summary
 
-##### Scripts
+![](./manuscript/figures/Supplementary%20Figure%202.%20Manhattan%20plot%20of%20a%20GWAS%20of%20self-reported%20glycosuria%20in%20the%20third%20trimester%20of%20pregnancy%20in%20ALSPAC.png)
 
-  - All of the scripts use relative file paths - `./my/file/path` -
-    where `./` is the directory `001_glycosuria_GWAS` from which I run
-    all scripts.
-  - I used Terminal on a Mac to run all of the scripts - the scripts
-    were run on the University of Bristol High Performance Computer,
-    BlueCrystal 3
+*Manhattan plot of a GWAS of self-reported glycosuria in the third
+trimester of pregnancy in ALSPAC*
 
-#### Paper
+We conducted a genome-wide association study (GWAS) of glycosuria (sugar
+in urine) in pregnant mothers from the Avon Longitudinal Study of
+Parents and Children (ALSPAC). Due to a lack of available external data
+sources replication was not possible, instead we performed a GWAS in the
+Northern Finland Birth Cohort 1986 (NFBC1986) where we used mothers
+phenotype and the mothers’ offsprings genotype. To estimate the maternal
+effects from offspring genotypes we doubled the effect estimates and
+standard errors of the GWAS results (see:
+[PMID 27029810](https://www.ncbi.nlm.nih.gov/pubmed/?term=27029810),
+[PMID 29030599](https://www.ncbi.nlm.nih.gov/pubmed/?term=29030599),
+[PMID 9778168](https://www.ncbi.nlm.nih.gov/pubmed/?term=9778168))
 
-Clinically relevant levels of glucose in urine (glycosuria) during
-pregnancy are associated with adverse outcomes in pregnancy and later
-life. Studies of genetic contributions to glycosuria are important to
-understand aetiology and consider overlap with diabetes and renal
-function related traits but have been limited by available data.
+In order to reproduce this analysis you will need access to
+[ALSPAC](http://www.bristol.ac.uk/alspac/researchers/access/) and
+[NFBC1986](https://www.oulu.fi/nfbc/node/19668).
 
-Self-reported glycosuria during pregnancy and associated genetic data is
-uncommon. Direct, and therefore clinically-relevant, measurements of
-glycosuria and associated genetic data is rarer. We identified two
-studies with self-reported glycosuria and available genetic data, but
-only one study with a clinically relevant measure of glycosuria and
-associated genetic data.
+ 
 
-In this study we have undertaken a genome-wide association study (GWAS)
-of glycosuria in pregnancy to identify genetic variants associated with
-glucose in urine during pregnancy and to provide greater understanding
-of disease development, progression and related complications. We have
-also examined the genetic overlap between glycosuria and multiple
-diabetes-related traits.
+All scripts used for this work are in
+[`scripts`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/scripts):
 
-We used mothers from the Avon Longitudinal Study of Parents and Children
-(ALSPAC; case/control = 1,249/5,140). We have looked for confirmatory
-evidence of association signals in the only data set with similar
-measured phenotypes, mothers from the Northern Finnish Birth Cohort 1986
-(NFBC1986; case/control = 747/2,991).
+  - All of the scripts use relative file paths (`./my/file/path`) where
+    `./` is the directory `001_glycosuria_GWAS`
+  - This work was performed using Terminal on a Mac, and scripts were
+    run on the University of Bristol High Performance Computer,
+    [BlueCrystal 3](https://www.acrc.bris.ac.uk/acrc/phase3.htm)
 
-In ALSPAC we have identified an association with glycosuria that
-persisted in NFBC1986. In ALSPAC, the point estimate was stronger when
-defining glycosuria by clinically-relevant and objectively measured
-glycosuria. The association is upstream of the target of the gliflozin
-class of antidiabetic drugs, SLC5A2. We also found evidence of genetic
-correlation between glycosuria and urinary albumin-to-creatinine ratio
-and weaker evidence of correlation with type 2 diabetes. Overlap of
-glycosuria and diabetes and glycemic traits suggests similar aetiology
-and is consistent with glycosuria being driven by circulating blood
-glucose and renal function.
+ 
+
+The manuscript and all figures, tables and supplementary information are
+in
+[`manuscript`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/manuscript/).
+
+## Review
+
+All information from the review stage of publication are available in
+[`manuscript/review`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/manuscript/review).
+This includes reviewer comments and responses to reviewer comments. The
+script used to perform reviewer requested additional analysis is in
+[`scripts`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/scripts)
+and labelled
+[`reviewer_analysis.R`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/scripts/reviewer_analysis.R).
