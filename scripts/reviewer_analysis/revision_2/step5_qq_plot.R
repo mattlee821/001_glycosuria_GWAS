@@ -1,6 +1,6 @@
 library(ggplot2)
 library(data.table)
-data <- fread("meta_analysis_final_sample-size.txt", header = T)
+data <- fread("./001_glycosuria/reviewer_analysis/GWAS_revision2/step5/output/GWAS_output_final.txt", header = T)
 
 gg.qqplot <- function(ps, title, ci = 0.95) {
   n  <- length(ps)
@@ -38,16 +38,15 @@ gg.qqplot <- function(ps, title, ci = 0.95) {
 }
 
 chisq <- qchisq(1-data$P,1)
-chisq
 median(chisq)/qchisq(0.5,1)
 
 
-png("qq_plot.png",
+png("./001_glycosuria/reviewer_analysis/GWAS_revision2/step5/plots/qq_plot.png",
     height = 100,
     width = 100,
     units = "mm",
     res = 1000)
 gg.qqplot(data$P,
-          title = "λ = 1.017371",
+          title = "λ = 1.016",
           ci=NA) #remove confidence intervals with 'NA'
 dev.off()

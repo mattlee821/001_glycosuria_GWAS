@@ -4,7 +4,30 @@
 
 #meta analysis performed using METAL
 
-cd ./meta_analysis/
+cd meta_analysis/
+
+module add languages/R-3.5-ATLAS-gcc-7.1.0
+R
+library(data.table)
+
+# create sample size weighting column
+alspac <- fread("../GWAS/ALSPAC/step5_GWAS/output/GWAS_output_final.txt", header = T)
+names(alspac)
+alspac$N <- 4/(1/alspac$cases_total + 1/alspac$controls_total)
+summary(alspac$N)
+
+nfbc <- fread("../GWAS/NFBC/NFBC_GWAS_final_parental.txt", header = T)
+names(nfbc)
+nfbc$N <- 4/(1/747 + 1/2991)
+summary(nfbc$N)
+
+write.table(alspac, "ALSPAC_GWAS_meta-analysis_prep.txt", 
+            row.names = FALSE, col.names = TRUE, quote = FALSE, sep = "\t")
+write.table(nfbc, "NFBC_GWAS_meta-analysis_prep.txt", 
+            row.names = FALSE, col.names = TRUE, quote = FALSE, sep = "\t")
+
+q()
+n
 
 module add apps/metal-2011-3-25 
 
@@ -12,7 +35,8 @@ metal
 
 #ALSPAC & NFBC
 
-SCHEME STDERR
+SCHEME SAMPLESIZE
+WEIGHT N
 STDERR SE
 SEPARATOR TAB
 MARKER SNP
@@ -23,32 +47,28 @@ PVALUE P
 AVERAGEFREQ ON
 MINMAXFREQ ON
 
-PROCESS ./GWAS/ALSPAC/step5_GWAS/output/GWAS_output_final.txt
+PROCESS ALSPAC_GWAS_meta-analysis_prep.txt
 
-PROCESS ./GWAS/NFBC/NFBC_GWAS_final_parental.txt
+PROCESS NFBC_GWAS_meta-analysis_prep.txt
 
-OUTFILE ./meta_analysis/meta_analysis_ALSPAC_NFBC .txt
+OUTFILE meta_analysis_ALSPAC_NFBC_sample-size .txt
 
 ANALYZE HETEROGENEITY
 
-CLEAR
+QUIT
 
 #meta analysis clean up
-
-cd ./meta_analysis
-
-module add languages/R-3.5-ATLAS-gcc-7.1.0
 R
 
 # load GWAS_outut
 library(data.table)
-data <- fread("meta_analysis_ALSPAC_NFBC1.txt", header = T)
+data <- fread("meta_analysis_ALSPAC_NFBC_sample-size1.txt", header = T)
 head(data)
 
-colnames(data) <- c("SNP", "EA", "NEA", "Freq1", "FreqSE", "MinFreq", "MaxFreq", "Effect", "SE", "P", "Direction", "HetISq", "HetChiSq", "HetDf", "HetPVal")
+colnames(data) <- c("SNP", "EA", "NEA", "Freq1", "FreqSE", "MinFreq", "MaxFreq", "Weight", "Zscore", "P", "Direction", "HetISq", "HetChiSq", "HetDf", "HetPVal")
 head(data)
 
-write.table(data, "meta_analysis_ALSPAC_NFBC1.txt", 
+write.table(data, "meta_analysis_ALSPAC_NFBC_sample-size1.txt", 
             row.names = FALSE, col.names = TRUE, quote = FALSE, sep = "\t")
 
 #############
@@ -79,43 +99,42 @@ data$qmark <- lapply(data$Direction, function(x)
 
 dim(data) #11349282
 data_new <- subset(data, qmark == 0)
-dim(data_new) #7802683
+dim(data_new) #7802690
 data_new <- data_new[,c(1:15)]
 
-write.table(data_new, "meta_analysis_final.txt", 
+write.table(data_new, "meta_analysis_final_sample-size.txt", 
             row.names = FALSE, col.names = TRUE, quote = FALSE, sep = "\t")
 
 data_sig <- subset(data_new, P <= 5e-8) 
-dim(data_sig) #54
+dim(data_sig) #45
 data_sig <- data_sig[order(P),] 
 head(data_sig)
 
-write.table(data_sig, "meta_analysis_final_sig.txt", 
+write.table(data_sig, "meta_analysis_final_sample-size_sig.txt", 
             row.names = FALSE, col.names = TRUE, quote = FALSE, sep = "\t")
-
+q()
+n
 #############
 # get chr and bp for all rsID for meta-analysis from the snp-stats files
 
 #create combined snp-stats file from step3
-head -9 ./GWAS/ALSPAC/step3_create_SNP_stats/output/data_chr01_sample_filter_snpstats.txt | tail -n +9 > ./meta_analysis/snp-stats_combined_rsid_chr_bp.txt
-tail -n +10 -q ./GWAS/ALSPAC/step3_create_SNP_stats/output/*snpstats.txt >> ./meta_analysis/snp-stats_combined_rsid_chr_bp.txt
+head -9 ../GWAS/ALSPAC/step3_create_SNP_stats/output/data_chr01_sample_filter_snpstats.txt | tail -n +9 > snp-stats_combined_rsid_chr_bp.txt
+tail -n +10 -q ../GWAS/ALSPAC/step3_create_SNP_stats/output/*snpstats.txt >> snp-stats_combined_rsid_chr_bp.txt
 awk '{ print $1, $2, $3 }' snp-stats_combined_rsid_chr_bp.txt > snp-stats_combined_rsid_chr_bp_new.txt
 rm snp-stats_combined_rsid_chr_bp.txt
 mv snp-stats_combined_rsid_chr_bp_new.txt snp-stats_combined_rsid_chr_bp.txt
 
 #cut columns 1,2,3 and rearrange to SNP, chr, position
-cd ./meta_analysis
-
 R
 
 rm(list=ls())
 
 library(data.table)
-data <- fread("./meta_analysis/meta_analysis_final.txt", header = T)
+data <- fread("meta_analysis_final_sample-size.txt", header = T)
 head(data)
-dim(data) #7802683
+dim(data) #7802690
 
-snp_stats <- fread("./meta_analysis/snp-stats_combined_rsid_chr_bp.txt", header = T)
+snp_stats <- fread("snp-stats_combined_rsid_chr_bp.txt", header = T)
 head(snp_stats)
 dim(snp_stats) #28699532
 snp_stats <- snp_stats[,c(2,1,3)]
@@ -125,27 +144,15 @@ head(snp_stats)
 
 library(dplyr)
 data_new <- left_join(data, snp_stats, by = "SNP")
-dim(data_new) #7802718
+dim(data_new) #7802725
 head(data_new)
 
 #remove duplicate SNPs
 data_final <- data_new[!duplicated(data_new$SNP), ]
-dim(data_final) #7802683
+dim(data_final) #7802690
 head(data_final)
 
-#calculate OR and CI
-data_final$OR <- exp(data_final$Effect)
-data_final$ci_lower <- data_final$OR - 1.96 * data_final$SE
-data_final$ci_upper <- data_final$OR + 1.96 * data_final$SE
-dim(data_final)
-head(data_final)
-
-#rearrange columns for ease
-names(data_final)
-data_final <- data_final[,c(1:17,20:22)]
-head(data_final)
-
-write.table(data_final, "meta_analysis_final.txt", 
+write.table(data_final, "meta_analysis_final_sample-size.txt", 
             row.names = FALSE, col.names = TRUE, quote = FALSE, sep = "\t")
 
 data_sig <- subset(data_final, P <= 5e-8) 
@@ -154,6 +161,6 @@ head(data_sig)
 names(data_sig)
 data_sig <- data_sig[order(data_sig$P),] 
 head(data_sig)
-write.table(data_sig, "meta_analysis_final_sig.txt", 
+write.table(data_sig, "meta_analysis_final_sig_sample-size.txt", 
             row.names = FALSE, col.names = TRUE, quote = FALSE, sep = "\t")
 

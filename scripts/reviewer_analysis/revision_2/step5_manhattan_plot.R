@@ -1,19 +1,16 @@
 # https://github.com/pcgoddard/Burchardlab_Tutorials/wiki/GGplot2-Manhattan-Plot-Function
 # Libraries 
-install.packages("munsell")
-
-install.packages("ggrepel")
 library(readr)
-library(ggplot2)
 library(ggrepel)
+library(ggplot2)
 library(dplyr)
 library(RColorBrewer)
 library(data.table)
 
-data <- fread("meta_analysis_final_sample-size.txt", header = T)
+data <- fread("./reviewer_analysis/GWAS_revision2/step5/output/GWAS_output_final.txt", header = T)
 names(data)
-colnames(data)[16] <- "CHR"
-colnames(data)[17] <- "BP"
+colnames(data)[2] <- "CHR"
+colnames(data)[3] <- "BP"
 
 # manhattan plot function
 gg.manhattan <- function(df, CHR, P, BP, threshold, annotate, hlight, col, ylims, title){
@@ -25,7 +22,7 @@ gg.manhattan <- function(df, CHR, P, BP, threshold, annotate, hlight, col, ylims
     summarise(chr_len=max(BP)) %>% 
     
     # Calculate cumulative position of each chromosome
-    mutate(tot=cumsum(chr_len)-chr_len) %>%
+    mutate(tot=cumsum(as.numeric(chr_len))-chr_len) %>%
     select(-chr_len) %>%
     
     # Add this info to the initial dataset
@@ -94,10 +91,10 @@ suggestive <- 1e-6 # suggestive threshold line
 
 # list of SNPs to highlight in a different colour
 #highlight_snps <- c() # snps to highlight in a different colour to other SNPs
-annotate_snps <- c("rs13337037", "rs10991823") # snps to annotate with a label of their rsID
+annotate_snps <- "" # snps to annotate with a label of their rsID
 
 #plot and save
-png("meta-analysis_sample-size_manhattan_plot.png",
+png("./reviewer_analysis/GWAS_revision2/step5/plots/manhattan_plot.png",
     width=330, height=80, units='mm', res=1000)
 # Run Function ====
 gg.manhattan(df = data, 
@@ -105,7 +102,7 @@ gg.manhattan(df = data,
              threshold = NA, #what threshold will you highlight SNPs from
              hlight = NA, #provide a list of SNPs to highlight in a different colour
              col=c("grey", "skyblue"), #provide colours or a vector of colours
-             ylims=c(0,16), #provide minimum and maximum of the Y axis
+             ylims=c(0,40), #provide minimum and maximum of the Y axis
              title="") 
 dev.off()
 
