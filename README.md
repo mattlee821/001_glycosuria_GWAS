@@ -5,9 +5,8 @@ Date of publication - 2019-10-07
 
 ## Title
 
-Common variation on chromosome 16 is associated with glycosuria in
-pregnancy: Findings from a genome-wide association study in European
-women.
+Common variation at 16p11.2 is associated with glycosuria in pregnancy:
+Findings from a genome-wide association study in European women.
 
 ## Citation
 
@@ -16,7 +15,7 @@ women.
 ## Summary statistics
 
 All summary statistcs are available on the [data.bris
-website]().
+website](https://doi.org/10.5523/bris.9vjsikubd658257lbu6lrizog).
 
 ## Summary
 
@@ -35,28 +34,21 @@ effects from offspring genotypes we doubled the effect estimates and
 standard errors of the GWAS results (see:
 [PMID 27029810](https://www.ncbi.nlm.nih.gov/pubmed/?term=27029810),
 [PMID 29030599](https://www.ncbi.nlm.nih.gov/pubmed/?term=29030599),
-[PMID 9778168](https://www.ncbi.nlm.nih.gov/pubmed/?term=9778168))
+[PMID 9778168](https://www.ncbi.nlm.nih.gov/pubmed/?term=9778168)). The
+manuscript and all figures, tables and supplementary information are in
+[`manuscript`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/manuscript/).
 
 In order to reproduce this analysis you will need access to
 [ALSPAC](http://www.bristol.ac.uk/alspac/researchers/access/) and
 [NFBC1986](https://www.oulu.fi/nfbc/node/19668).
 
- 
-
 All scripts used for this work are in
 [`scripts`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/scripts):
 
-  - All of the scripts use relative file paths (`./my/file/path`) where
-    `./` is the directory `001_glycosuria_GWAS`
-  - This work was performed using Terminal on a Mac, and scripts were
-    run on the University of Bristol High Performance Computer,
+  - All of the scripts use relative file paths (`./my/file/path`)
+  - This work was performed using a Mac, and scripts were run on the
+    University of Bristol High Performance Computer,
     [BlueCrystal 3](https://www.acrc.bris.ac.uk/acrc/phase3.htm)
-
- 
-
-The manuscript and all figures, tables and supplementary information are
-in
-[`manuscript`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/manuscript/).
 
 ## Review
 
@@ -65,5 +57,4 @@ All information from the review stage of publication are available in
 This includes reviewer comments and responses to reviewer comments. The
 script used to perform reviewer requested additional analysis is in
 [`scripts`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/scripts)
-and labelled
-[`reviewer_analysis.R`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/scripts/reviewer_analysis.R).
+in the `reviewer_analysis`.
