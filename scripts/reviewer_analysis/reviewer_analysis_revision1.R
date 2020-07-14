@@ -4,8 +4,8 @@
 # data
 ## extract rs13337037 dosage
 module add apps/qctool-2.0
-qctool -g ./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data/dosage_bgen/data_chr16.bgen \
--s ./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data/data.sample \
+qctool -g /data/dosage_bgen/data_chr16.bgen \
+-s /data/data.sample \
 -incl-range 31478710-31478711  \
 -assume-chromosome 16 \
 -ofiletype dosage \

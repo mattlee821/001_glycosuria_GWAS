@@ -17,9 +17,9 @@ module add apps/qctool-2.0
 
 cd ./001_glycosuria/reviewer_analysis/GWAS_revision2/step6
 
-dir=./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data/dosage_bgen
+dir=/data/dosage_bgen
 dir1=./001_glycosuria/reviewer_analysis/GWAS_revision2
-dir2=./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data
+dir2=/data
 
 VAR1=data_chr01.bgen
 
@@ -27,7 +27,7 @@ qctool -g ${dir}/${VAR1} -s ${dir2}/data.sample -og ${VAR1%.bgen}_sample_filter.
 ############################
 
 #create .txt file of all names for submission scripts based on files in a directory
-ls -1 ./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data/dosage_bgen > bgen_filenames.txt
+ls -1 /data/dosage_bgen > bgen_filenames.txt
 
 #create multiple qsub scripts based on master_sub
 cat bgen_filenames.txt | while read i; do echo ${i}; awk '{ if (NR == 17) print "VAR1='${i}'"; else print $0}' master_sub > ${i}.sh; done

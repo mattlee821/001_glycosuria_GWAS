@@ -19,7 +19,7 @@ library(readstata13)
 ######################################
 
 #aln file for all individuals
-genetic_data <- read.table("./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data/data.sample", skip=2)
+genetic_data <- read.table("data/data.sample", skip=2)
 colnames(genetic_data) <- c("ID_1","ID_2","missing","father","mother","sex","plink_pheno")
 colnames(genetic_data)[1] <- "aln_qlet"
 
@@ -69,7 +69,7 @@ head(dataframe)
 ## related individuals
 ######################################
 #open and organise data
-mother_relateds <- read.table("./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data/derived/unrelated_ids/mothers/exclusion_list.txt", header = F) #mothers
+mother_relateds <- read.table("data/derived/unrelated_ids/mothers/exclusion_list.txt", header = F) #mothers
 mother_relateds <- mother_relateds[1]
 colnames(mother_relateds) <- "mother"
 mother_relateds$mother_relateds <- 1
@@ -81,7 +81,7 @@ table(dataframe1$mother_relateds)
 head(dataframe1)
 rm(mother_relateds)
 
-child_relateds <- read.table("./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data/derived/unrelated_ids/children/exclusion_list.txt", header = F) #children
+child_relateds <- read.table("data/derived/unrelated_ids/children/exclusion_list.txt", header = F) #children
 child_relateds <- child_relateds[1]
 colnames(child_relateds) <- "aln_qlet"
 child_relateds$child_relateds <- 1
@@ -205,8 +205,8 @@ write.table(include, "./001_glycosuria/reviewer_analysis/GWAS_revision2/pheno_fi
 ######################################
 ## principle components for all
 ######################################
-mother_PC <- read.table("./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data/derived/principal_components/mothers/data.eigenvec", header = F)
-children_PC <- read.table("./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data/derived/principal_components/children/data.eigenvec", header = F)
+mother_PC <- read.table("data/derived/principal_components/mothers/data.eigenvec", header = F)
+children_PC <- read.table("data/derived/principal_components/children/data.eigenvec", header = F)
 
 PC <- rbind(mother_PC, children_PC)
 colnames(PC)[1] <- "ID_1"
@@ -233,8 +233,8 @@ write.table(pheno_file, "./001_glycosuria/reviewer_analysis/GWAS_revision2/pheno
 ## principle components for include list only
 ######################################
 
-mother_PC <- read.table("./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data/derived/principal_components/mothers/data.eigenvec", header = F)
-children_PC <- read.table("./alspac/studies/latest/alspac/genetic/variants/arrays/gwas/imputed/1000genomes/released/2015-10-30/data/derived/principal_components/children/data.eigenvec", header = F)
+mother_PC <- read.table("data/derived/principal_components/mothers/data.eigenvec", header = F)
+children_PC <- read.table("data/derived/principal_components/children/data.eigenvec", header = F)
 
 PC <- rbind(mother_PC, children_PC)
 colnames(PC)[1] <- "ID_1"
