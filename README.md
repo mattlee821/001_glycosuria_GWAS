@@ -10,12 +10,13 @@ Findings from a genome-wide association study in European women.
 
 ## Citation
 
-……
+[Matthew A Lee, George McMahon, Ville Karhunen, Kaitlin H Wade, Laura J Corbin, David A Hughes, George Davey Smith, Debbie A Lawlor, Marjo-Riitta Jarvelin, Nicholas J Timpson, Common variation at 16p11.2 is associated with glycosuria in pregnancy: Findings from a genome-wide association study in European women., Human Molecular Genetics, , ddaa054, https://doi.org/10.1093/hmg/ddaa054](https://academic.oup.com/hmg/article/doi/10.1093/hmg/ddaa054/5813101)
+
 
 ## Summary statistics
 
 All summary statistcs are available on the [data.bris
-website](https://doi.org/10.5523/bris.9vjsikubd658257lbu6lrizog).
+website](https://data.bris.ac.uk/data/dataset/9vjsikubd658257lbu6lrizog).
 
 ## Summary
 
