@@ -53,9 +53,4 @@ All scripts used for this work are in
 
 ## Review
 
-All information from the review stage of publication are available in
-[`manuscript/review`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/manuscript/review).
-This includes reviewer comments and responses to reviewer comments. The
-script used to perform reviewer requested additional analysis is in
-[`scripts`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/scripts)
-in the `reviewer_analysis`.
+The script used to perform reviewer requested additional analysis is in [`scripts`](https://github.com/mattlee821/001_glycosuria_GWAS/tree/master/scripts) in the `reviewer_analysis`.
