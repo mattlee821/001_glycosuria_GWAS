@@ -3,6 +3,8 @@
 
 Date of publication - 2019-10-07
 
+[![DOI](https://zenodo.org/badge/198194662.svg)](https://zenodo.org/badge/latestdoi/198194662)
+
 ## Title
 
 Common variation at 16p11.2 is associated with glycosuria in pregnancy:
